@@ -11,13 +11,10 @@ import java.io.IOException;
 
 class Parser {
 
-    public Parser(){
-
-    }
-
     String[] countryList, rateList;
-    String s, r;
+    String currencies, rates;
 
+    //DOM Parser:
     public void parse() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -34,18 +31,14 @@ class Parser {
                     Node cl = cubeList.item(i);
                     if (cl.getNodeType() == Node.ELEMENT_NODE) {
                         Element cube = (Element) cl;
-                        //System.out.println(cube.getAttribute("currency"));
-                        s=cube.getAttribute("currency");
-                        r=cube.getAttribute("rate");
-                        //System.out.println(s);
-                        countryList[i-2] = s;
-                        rateList[i-2] = r;
+
+                        currencies =cube.getAttribute("currency");
+                        rates =cube.getAttribute("rate");
+
+                        countryList[i-2] = currencies;
+                        rateList[i-2] = rates;
                     }
                 }
-
-                //for(int i=0; i<countryList.length; i++){
-                    //System.out.println(countryList[i]);
-               // }
 
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();

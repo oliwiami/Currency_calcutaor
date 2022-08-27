@@ -15,19 +15,22 @@ public class Calculator implements ActionListener {
     String[] currency, rates;
     String chosenCurrency;
 
+    //DOM parser:
     Parser parser = new Parser();
 
     public Calculator(){
 
+        //Getting list of currency and rates from xml:
         parser.parse();
         currency = parser.countryList;
         rates = parser.rateList;
 
+        //GUI:
         mainFrame = new JFrame();
-        exValue = new JLabel();
+        exValue = new JLabel(); //exchange value
         eurLabel = new JLabel();
         eurLabel.setText("EUR:");
-        chCurrency = new JLabel();
+        chCurrency = new JLabel(); //choose currency
         chCurrency.setText("Choose Currency:");
 
         eurField = new JTextField();
@@ -61,10 +64,7 @@ public class Calculator implements ActionListener {
 
     public static void main(String[] args){
 
-        System.out.println("Program started");
-
         new Calculator();
-
     }
 
     @Override
@@ -75,6 +75,7 @@ public class Calculator implements ActionListener {
 
             chosenCurrency = (String) currencyList.getSelectedItem();
 
+            //Finding the rate for the chosen currency:
             for(int i=0; i<currency.length; i++){
                 if(currency[i].equals(chosenCurrency)){
                     exRate = Double.parseDouble(rates[i]);
@@ -83,13 +84,15 @@ public class Calculator implements ActionListener {
             }
 
             DecimalFormat dff = new DecimalFormat("#.####");
-            Double value = eur * exRate;
-            exValue.setText(" = " + (dff.format(value)) + " " + chosenCurrency);
 
-        }catch(Exception e){
-            exValue.setText("Invalid value");
+            //Currency exchange result:
+            Double result = eur * exRate;
+            exValue.setText(" = " + (dff.format(result)) + " " + chosenCurrency);
+
+        }catch(NumberFormatException e){
+            exValue.setText("Invalid input");
+            e.printStackTrace();
             System.out.println("An exception occurred: " + "\n" + e.getMessage());
         }
     }
-
 }
