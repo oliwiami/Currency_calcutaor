@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Calculator implements ActionListener {
@@ -83,7 +85,7 @@ public class Calculator implements ActionListener {
                 }
             }
 
-            DecimalFormat dff = new DecimalFormat("#.####");
+            DecimalFormat dff = new DecimalFormat("0.0000");
 
             //Currency exchange result:
             Double result = calculate(eur, exRate);
@@ -97,6 +99,13 @@ public class Calculator implements ActionListener {
     }
 
     public double calculate(double value, double rate){
-        return value * rate;
+        if(value<0){
+            throw new NumberFormatException("Value can't be negative");
+        }else {
+            BigDecimal bigDecimal = new BigDecimal(value * rate);
+            BigDecimal setScale = bigDecimal.setScale(4, RoundingMode.HALF_UP);
+            double result = setScale.doubleValue();
+            return result;
+        }
     }
 }
