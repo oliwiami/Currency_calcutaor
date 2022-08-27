@@ -86,7 +86,7 @@ public class Calculator implements ActionListener {
             DecimalFormat dff = new DecimalFormat("#.####");
 
             //Currency exchange result:
-            Double result = eur * exRate;
+            Double result = calculate(eur, exRate);
             exValue.setText(" = " + (dff.format(result)) + " " + chosenCurrency);
 
         }catch(NumberFormatException e){
@@ -94,5 +94,9 @@ public class Calculator implements ActionListener {
             e.printStackTrace();
             System.out.println("An exception occurred: " + "\n" + e.getMessage());
         }
+    }
+
+    public double calculate(double value, double rate){
+        return value * rate;
     }
 }
