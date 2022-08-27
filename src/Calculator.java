@@ -13,9 +13,10 @@ public class Calculator implements ActionListener {
     private JComboBox<String> currencyList;
 
     CurrencyPlaceholder cp = new CurrencyPlaceholder();
-    String[] currency = cp.currency;
-    //String[] currency = {"PLN","USD"};
+    String[] currency= cp.currency;
     String chosenCurrency;
+
+    Parser parser = new Parser();
 
     public Calculator(){
 
@@ -52,6 +53,7 @@ public class Calculator implements ActionListener {
     public static void main(String[] args){
 
         System.out.println("Program started");
+
         new Calculator();
 
     }
@@ -59,6 +61,8 @@ public class Calculator implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
+            parser.parse();
+            //System.out.println(parser.countryList[0]);
             Double eur = Double.parseDouble(eurField.getText());
             Double exRate;
             chosenCurrency = (String) currencyList.getSelectedItem();
