@@ -15,8 +15,8 @@ class Parser {
 
     }
 
-    String[] countryList;
-    String s;
+    String[] countryList, rateList;
+    String s, r;
 
     public void parse() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -28,6 +28,7 @@ class Parser {
                 NodeList cubeList = doc.getElementsByTagName("Cube");
 
                 countryList = new String[cubeList.getLength()-2];
+                rateList = new String[cubeList.getLength()-2];
 
                 for (int i = 2; i < cubeList.getLength(); i++) {
                     Node cl = cubeList.item(i);
@@ -35,8 +36,10 @@ class Parser {
                         Element cube = (Element) cl;
                         //System.out.println(cube.getAttribute("currency"));
                         s=cube.getAttribute("currency");
+                        r=cube.getAttribute("rate");
                         //System.out.println(s);
                         countryList[i-2] = s;
+                        rateList[i-2] = r;
                     }
                 }
 

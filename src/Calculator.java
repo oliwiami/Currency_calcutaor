@@ -6,29 +6,36 @@ import java.text.DecimalFormat;
 
 public class Calculator implements ActionListener {
 
-    private JLabel exValue;
+    private JLabel exValue, eurLabel, chCurrency;
     private JFrame mainFrame;
     private JTextField eurField;
     private JButton calculate;
     private JComboBox<String> currencyList;
 
-    CurrencyPlaceholder cp = new CurrencyPlaceholder();
-    String[] currency= cp.currency;
+    String[] currency, rates;
     String chosenCurrency;
 
     Parser parser = new Parser();
 
     public Calculator(){
 
+        parser.parse();
+        currency = parser.countryList;
+        rates = parser.rateList;
+
         mainFrame = new JFrame();
         exValue = new JLabel();
+        eurLabel = new JLabel();
+        eurLabel.setText("EUR:");
+        chCurrency = new JLabel();
+        chCurrency.setText("Choose Currency:");
 
         eurField = new JTextField();
 
         calculate = new JButton("Calculate");
         calculate.addActionListener(this);
 
-        currencyList = new JComboBox<String>(currency);
+        currencyList = new JComboBox<>(currency);
         currencyList.setMaximumSize(currencyList.getPreferredSize());
         currencyList.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -36,7 +43,9 @@ public class Calculator implements ActionListener {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(90,90,50,90));
         panel.setLayout(new GridLayout(0, 1));
+        panel.add(eurLabel);
         panel.add(eurField);
+        panel.add(chCurrency);
         panel.add(currencyList);
         panel.add(calculate);
         panel.add(exValue);
@@ -61,33 +70,29 @@ public class Calculator implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         try {
-            parser.parse();
-            //System.out.println(parser.countryList[0]);
             Double eur = Double.parseDouble(eurField.getText());
-            Double exRate;
+            Double exRate=0.0;
+
             chosenCurrency = (String) currencyList.getSelectedItem();
 
-            switch(chosenCurrency){
-                case "PLN" :
-                    exRate = 4.7578;
+            for(int i=0; i<currency.length; i++){
+                if(currency[i] == chosenCurrency){
+                    exRate = Double.parseDouble(rates[i]);
                     break;
-                case "USD":
-                    exRate = 0.9970;
-                    break;
-                case "JPY":
-                    exRate = 137.02;
-                    break;
-                default:
-                    exRate =0.0;
+                }
+                else{
+                    continue;
+                }
             }
-            //label.setText(chosenCurrency);
+
             DecimalFormat dff = new DecimalFormat("#.####");
             Double value = eur * exRate;
-            exValue.setText(String.valueOf(dff.format(value)));
+            exValue.setText(" = " + (dff.format(value)) + " " + chosenCurrency);
 
         }catch(Exception e){
             exValue.setText("Please insert a valid value");
             System.out.println("An exception occurred: " + "\n" + e.getMessage());
         }
     }
+
 }
