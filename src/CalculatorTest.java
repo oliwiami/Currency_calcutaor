@@ -51,5 +51,10 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
         assertEquals(12.3400, calculator.calculate(1234, 0.01));
     }
+    @Test
+    void ValueTwoThousandFiveHundredSixtySevenAndRateOneHundredEightyNinePointOne(){
+        Calculator calculator = new Calculator();
+        assertEquals(485419.7000,calculator.calculate(2567,189.1));
+    }
 
 }
