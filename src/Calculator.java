@@ -41,7 +41,7 @@ public class Calculator implements ActionListener {
 
 
         JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(90,90,50,90));
+        panel.setBorder(BorderFactory.createEmptyBorder(100,100,60,100));
         panel.setLayout(new GridLayout(0, 1));
         panel.add(eurLabel);
         panel.add(eurField);
@@ -76,12 +76,9 @@ public class Calculator implements ActionListener {
             chosenCurrency = (String) currencyList.getSelectedItem();
 
             for(int i=0; i<currency.length; i++){
-                if(currency[i] == chosenCurrency){
+                if(currency[i].equals(chosenCurrency)){
                     exRate = Double.parseDouble(rates[i]);
                     break;
-                }
-                else{
-                    continue;
                 }
             }
 
@@ -90,7 +87,7 @@ public class Calculator implements ActionListener {
             exValue.setText(" = " + (dff.format(value)) + " " + chosenCurrency);
 
         }catch(Exception e){
-            exValue.setText("Please insert a valid value");
+            exValue.setText("Invalid value");
             System.out.println("An exception occurred: " + "\n" + e.getMessage());
         }
     }
