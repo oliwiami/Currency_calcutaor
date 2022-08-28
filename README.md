@@ -29,5 +29,5 @@ Libraries outside of jdk:
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Calculator_screen](screenshot1.png)
 
