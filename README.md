@@ -30,4 +30,5 @@ Libraries outside of jdk:
 
 ## Screenshots
 ![Calculator_screen](screenshot1.png)
+![Calculator_USD](screenshot2.png)
 
