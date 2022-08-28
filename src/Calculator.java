@@ -58,6 +58,7 @@ public class Calculator implements ActionListener {
         mainFrame.add(panel, BorderLayout.CENTER);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setTitle("Currency Calculator");
+        mainFrame.setPreferredSize(new Dimension(400,500));
         mainFrame.pack();
         mainFrame.setVisible(true);
 
@@ -93,7 +94,6 @@ public class Calculator implements ActionListener {
 
         }catch(NumberFormatException e){
             exValue.setText("Invalid input");
-            e.printStackTrace();
             System.out.println("An exception occurred: " + "\n" + e.getMessage());
         }
     }
