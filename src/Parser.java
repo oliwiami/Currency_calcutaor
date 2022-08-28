@@ -11,7 +11,30 @@ import java.io.IOException;
 
 class Parser {
 
-    String[] countryList, rateList;
+    //List of currencies:
+    private String[] countryList;
+
+    //Getter and setter:
+    public String[] getCountryList() {
+        return countryList;
+    }
+
+    public void setCountryList(String[] countryList) {
+        this.countryList = countryList;
+    }
+
+    //List of currencies' rates:
+    private String[] rateList;
+
+    //Getter and setter:
+    public String[] getRateList() {
+        return rateList;
+    }
+
+    public void setRateList(String[] rateList) {
+        this.rateList = rateList;
+    }
+
     String currencies, rates;
 
     //DOM Parser:

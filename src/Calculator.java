@@ -24,8 +24,8 @@ public class Calculator implements ActionListener {
 
         //Getting list of currency and rates from xml:
         parser.parse();
-        currency = parser.countryList;
-        rates = parser.rateList;
+        currency = parser.getCountryList();
+        rates = parser.getRateList();
 
         //GUI:
         mainFrame = new JFrame();
