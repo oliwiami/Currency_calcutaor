@@ -2,11 +2,6 @@
 > Currency calculator is a simple tool to quickly and easly convert value from euro to any desired currency. 
 
 
-## Table of Contents
-* [General Info](#general-information)
-* [Libraries](#libraries)
-* [Screenshots](#screenshots)
-
 
 ## General Information
 
